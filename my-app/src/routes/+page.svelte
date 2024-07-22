@@ -1,3 +1,29 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+
+import {Button} from "$lib/components/ui/button/index.js";
+import * as Card from "$lib/components/ui/card/index.js";
+import {Input} from "$lib/components/ui/input/index.js";
+import {Label} from "$lib/components/ui/label/index.js";
+
+</script>
+
+
+<Card.Root class="w-full max-w-sm">
+        <Card.Header>
+                <Card.Title class="text-2xl">Login</Card.Title>
+                <Card.Description>Enter your email below to login to your account.</Card.Description>
+        </Card.Header>
+        <Card.Content class="grid gap-4">
+                <div class="grid gap-2">
+                        <Label for="email">Email</Label>
+                        <Input id="email" type="email" placeholder="m@example.com" required />
+                </div>
+                <div class="grid gap-2">
+                        <Label for="password">Password</Label>
+                        <Input id="password" type="password" required />
+                </div>
+        </Card.Content>
+        <Card.Footer>
+                <Button class="w-full">Sign in</Button>
+        </Card.Footer>
+</Card.Root>
