@@ -39,16 +39,19 @@
 		"tailwindcss": "^3.4.4",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
-		"vite": "^5.0.11"
+		"vite": "^5.0.11",
+		"zod": "^3.23.8"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
+		"@material/form-field": "^14.0.0",
 		"bits-ui": "^0.21.12",
 		"clsx": "^2.1.1",
+		"formsnap": "^1.0.1",
+		"pagedata": "^6.0.0",
 		"tailwind-merge": "^2.4.0",
-		"tailwind-variants": "^0.2.1",
-		"zod": "^3.23.8"
+		"tailwind-variants": "^0.2.1"
 	}
 }

@@ -1,29 +1,55 @@
 <script lang="ts">
 
-import {Button} from "$lib/components/ui/button/index.js";
-import * as Card from "$lib/components/ui/card/index.js";
-import {Input} from "$lib/components/ui/input/index.js";
-import {Label} from "$lib/components/ui/label/index.js";
+    import {Button} from "$lib/components/ui/button/index.js";
+    import * as Card from "$lib/components/ui/card/index.js";
+    import {Input} from "$lib/components/ui/input/index.js";
+    import {Label} from "$lib/components/ui/label/index.js";
+    import {superForm} from "sveltekit-superforms";
+    import {zodClient} from "sveltekit-superforms/adapters";
+    import {loginFormSchema} from "./schema.js";
+    import * as Form from "$lib/components/ui/form";
+    import type {PageData} from './$types';
+
+    export let data: PageData;
+
+    const loginForm = superForm(data.loginForm, {
+        validators: zodClient(loginFormSchema),
+    });
+
+    const {form: loginFormData, enhance, submitting} = loginForm;
 
 </script>
 
-
-<Card.Root class="w-full max-w-sm">
-        <Card.Header>
-                <Card.Title class="text-2xl">Login</Card.Title>
-                <Card.Description>Enter your email below to login to your account.</Card.Description>
-        </Card.Header>
-        <Card.Content class="grid gap-4">
-                <div class="grid gap-2">
-                        <Label for="email">Email</Label>
-                        <Input id="email" type="email" placeholder="m@example.com" required />
-                </div>
-                <div class="grid gap-2">
-                        <Label for="password">Password</Label>
-                        <Input id="password" type="password" required />
-                </div>
-        </Card.Content>
-        <Card.Footer>
-                <Button class="w-full">Sign in</Button>
-        </Card.Footer>
-</Card.Root>
+<div class="container flex mx-auto w-screen h-screen items-center justify-center">
+    <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title text-center w-full block">Login</h2>
+            <form class="grid gap-y-2 grid-cols-1 my-4" id="login" method="POST" use:enhance action="?/login">
+                <Card.Root class="w-full max-w-sm">
+                    <Card.Header>
+                        <Card.Title class="text-2xl">Login</Card.Title>
+                        <Card.Description>Enter your email below to login to your account.</Card.Description>
+                    </Card.Header>
+                    <Card.Content class="grid gap-4">
+                        <div class="grid gap-2">
+                                <Form.Field form={loginForm} name="usernameOREmail">
+                                        <Form.Control let:attrs>
+                                                <Form.Label>Email</Form.Label>
+                                                <Input {...attrs} bind:value={$loginFormData.usernameOREmail} placeholder="your@email.com" />
+                                        </Form.Control>
+                                        <Form.FieldErrors/>
+                                </Form.Field>
+                        </div>
+                        <div class="grid gap-2">
+                            <Label for="password">Password</Label>
+                            <Input id="password" type="password" required/>
+                        </div>
+                    </Card.Content>
+                    <Card.Footer>
+                        <Button class="w-full">Sign in</Button>
+                    </Card.Footer>
+                </Card.Root>
+            </form>
+        </div>
+    </div>
+</div>
