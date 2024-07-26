@@ -12,5 +12,28 @@ export const load = (async () => {
 
 
 export const actions = {
+    login: async (event) => {
+        const form = await superValidate(event, zod(loginFormSchema));
 
-} satisfies Actions
+        if (!form.valid) {
+            return fail(400, {
+                form
+            });
+        }
+
+        try {
+            const usernameOREmail = form.data.usernameOREmail;
+            const password = form.data.password;
+
+            if (usernameOREmail == "admin") {
+                if (password == "admin") {
+                    redirect(302, '/dashboard')
+                }
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    } satisfies Actions

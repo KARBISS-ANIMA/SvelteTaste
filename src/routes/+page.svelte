@@ -32,21 +32,33 @@
                     </Card.Header>
                     <Card.Content class="grid gap-4">
                         <div class="grid gap-2">
-                                <Form.Field form={loginForm} name="usernameOREmail">
-                                        <Form.Control let:attrs>
-                                                <Form.Label>Email</Form.Label>
-                                                <Input {...attrs} bind:value={$loginFormData.usernameOREmail} placeholder="your@email.com" />
-                                        </Form.Control>
-                                        <Form.FieldErrors/>
-                                </Form.Field>
+                            <Form.Field form={loginForm} name="usernameOREmail">
+                                <Form.Control let:attrs>
+                                    <Form.Label>Email</Form.Label>
+                                    <Input {...attrs} bind:value={$loginFormData.usernameOREmail}
+                                           placeholder="your@email.com"/>
+                                </Form.Control>
+                                <Form.FieldErrors/>
+                            </Form.Field>
                         </div>
                         <div class="grid gap-2">
-                            <Label for="password">Password</Label>
-                            <Input id="password" type="password" required/>
+                            <Form.Field form={loginForm} name="password">
+                                <Form.Control let:attrs>
+                                    <Form.Label>Password</Form.Label>
+                                    <Input {...attrs} bind:value={$loginFormData.password}
+                                           type="password" placeholder="••••••••" />
+                                </Form.Control>
+                                <Form.FieldErrors/>
+                            </Form.Field>
                         </div>
                     </Card.Content>
                     <Card.Footer>
-                        <Button class="w-full">Sign in</Button>
+                        <Form.Button class="w-full" form="login" disabled={$submitting}>
+                            {#if $submitting}
+                                <span class="loading loading-spinner loading-xs"></span>
+                            {/if}
+                            Sign in
+                        </Form.Button>
                     </Card.Footer>
                 </Card.Root>
             </form>
