@@ -27,7 +27,8 @@ export const actions = {
 
             if (usernameOREmail == "admin") {
                 if (password == "admin") {
-                    redirect(302, '/dashboard')
+                    redirect(302, '/')
+                    return (form)
                 }
             }
 
