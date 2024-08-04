@@ -46,9 +46,12 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
+		"-": "^0.0.1",
 		"@material/form-field": "^14.0.0",
+		"@sveltejs/adapter-node": "^5.2.0",
 		"bits-ui": "^0.21.12",
 		"clsx": "^2.1.1",
+		"environment": "^1.1.0",
 		"formsnap": "^1.0.1",
 		"pagedata": "^6.0.0",
 		"tailwind-merge": "^2.4.0",
