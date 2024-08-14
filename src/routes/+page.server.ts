@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 import {zod} from "sveltekit-superforms/adapters";
 import {loginFormSchema} from "./schema";
 import {superValidate} from "sveltekit-superforms";
-import {user} from "../store.js";
+import {isAuthorized} from "../store.js";
 
 export const load = (async () => {
     return {
@@ -25,11 +25,12 @@ export const actions = {
         try {
             const usernameOREmail = form.data.usernameOREmail;
             const password = form.data.password;
+            const authorized : boolean = true;
 
             if (usernameOREmail == "admin") {
                 if (password == "admin") {
-                    user.update((u) => u = JSON.stringify({ email: usernameOREmail, password: password }))
-                    redirect(302, '/')
+                        isAuthorized.update((u) => u = JSON.stringify({authorized}))
+                    redirect(302, '/afterAuth')
                     return (form)
                 }
             }
