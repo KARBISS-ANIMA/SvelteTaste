@@ -9,6 +9,7 @@
     import {loginFormSchema} from "./schema.js";
     import * as Form from "$lib/components/ui/form";
     import type {PageData} from './$types';
+    import {isAuthorized} from "../stores/storeAuth.js";
 
     export let data: PageData;
 
@@ -18,12 +19,22 @@
 
     const {form: loginFormData, enhance, submitting} = loginForm;
 
+    $: Auth = $isAuthorized
+
+    console.log("page log isAuthorized ->" + $isAuthorized)
+
 </script>
+
+{#if Auth===true}
+    Авторизован
+    {:else if Auth===false}
+    Не авторизован
+    {/if}
 
 <div class="container flex mx-auto w-screen h-screen items-center justify-center">
     <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
-            <h2 class="card-title text-center w-full block">Login</h2>
+            <h2 class="card-title text-center w-full block">{Auth}</h2>
             <form class="grid gap-y-2 grid-cols-1 my-4" id="login" method="POST" use:enhance action="?/login">
                 <Card.Root class="w-full max-w-sm">
                     <Card.Header>
