@@ -4,8 +4,10 @@ import {zod} from "sveltekit-superforms/adapters";
 import {loginFormSchema} from "./schema";
 import {superValidate} from "sveltekit-superforms";
 import {isAuthorized} from "../stores/storeAuth.js";
+import {get} from "svelte/store";
 
 export const load = (async () => {
+
     return {
         loginForm: await superValidate(zod((loginFormSchema)))
     };
@@ -25,11 +27,16 @@ export const actions = {
         try {
             const usernameOREmail = form.data.usernameOREmail;
             const password = form.data.password;
-            const authorized : boolean = true;
+            if(!get(isAuthorized)) {
+                form.data.authToken = true
+            }else {form.data.authToken = false}
 
             if (usernameOREmail == "admin") {
                 if (password == "admin") {
-                        isAuthorized.update((u) => u = authorized)
+                    console.log(get(isAuthorized))
+                        isAuthorized.update((u) => u = form.data.authToken)
+                    console.log(get(isAuthorized))
+
                     redirect(302, '/afterAuth')
                     return (form)
                 }

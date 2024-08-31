@@ -10,16 +10,18 @@
     import * as Form from "$lib/components/ui/form";
     import type {PageData} from './$types';
     import {isAuthorized} from "../stores/storeAuth.js";
+    import {browser} from "$app/environment";
 
     export let data: PageData;
 
     const loginForm = superForm(data.loginForm, {
         validators: zodClient(loginFormSchema),
-    });
 
+    });
     const {form: loginFormData, enhance, submitting} = loginForm;
 
-    $: Auth = $isAuthorized
+
+    $: Auth = Boolean($isAuthorized)
 
     console.log("page log isAuthorized ->" + $isAuthorized)
 

@@ -3,7 +3,7 @@ import {browser} from "$app/environment";
 
 let persistedUser = browser && localStorage.getItem('user')
 
-export let isAuthorized = writable(persistedUser ? JSON.parse(persistedUser) : '')
+export let isAuthorized = writable(persistedUser ? JSON.parse(persistedUser) : false)
 
 if (browser) {
     isAuthorized.subscribe(u => localStorage.user = u)

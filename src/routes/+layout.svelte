@@ -1,2 +1,9 @@
+<script>
+    import "../app.css";
 
-    <slot></slot><script>import "../app.css";</script>
+</script>
+
+<a href="/">login</a>
+<a href="/afterAuth">After Authorized</a>
+
+    <slot></slot>
