@@ -1,10 +1,13 @@
-import { writable } from 'svelte/store'
+import {writable} from 'svelte/store'
 import {browser} from "$app/environment";
 
-let persistedUser = browser && localStorage.getItem('user')
+let defaulteValue = false;
+let persistedUser = browser ? localStorage.getItem('authToken') ?? defaulteValue : defaulteValue;
 
-export let isAuthorized = writable(persistedUser ? JSON.parse(persistedUser) : false)
+export let isAuthorized = writable<boolean>(Boolean(persistedUser));
 
-if (browser) {
-    isAuthorized.subscribe(u => localStorage.user = u)
-}
+isAuthorized.subscribe((value) => {
+    if (browser) {
+        window.localStorage.setItem('authToken', String(value));
+    }
+});

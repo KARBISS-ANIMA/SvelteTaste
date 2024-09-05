@@ -21,22 +21,22 @@
     const {form: loginFormData, enhance, submitting} = loginForm;
 
 
-    $: Auth = Boolean($isAuthorized)
+
 
     console.log("page log isAuthorized ->" + $isAuthorized)
 
 </script>
 
-{#if Auth===true}
+{#if $isAuthorized===true}
     Авторизован
-    {:else if Auth===false}
+    {:else if $isAuthorized===false}
     Не авторизован
     {/if}
 
 <div class="container flex mx-auto w-screen h-screen items-center justify-center">
     <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
-            <h2 class="card-title text-center w-full block">{Auth}</h2>
+            <h2 class="card-title text-center w-full block">{$isAuthorized}</h2>
             <form class="grid gap-y-2 grid-cols-1 my-4" id="login" method="POST" use:enhance action="?/login">
                 <Card.Root class="w-full max-w-sm">
                     <Card.Header>
